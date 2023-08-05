@@ -1,3 +1,4 @@
+import 'package:covid_tracker/View/details_screen.dart';
 import 'package:covid_tracker/models/services/state_services.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -29,9 +30,7 @@ class _CountriesState extends State<Countries> {
               TextFormField(
                 controller: _searchController,
                 onChanged: (value) {
-                  setState(() {
-                    
-                  });
+                  setState(() {});
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -41,7 +40,7 @@ class _CountriesState extends State<Countries> {
               ),
               Expanded(
                 // Wrap FutureBuilder with Expanded
-                child: FutureBuilder(
+                child: FutureBuilder<List<dynamic>>(
                   future: _stateServices.countriesListApi(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<dynamic>> snapshot) {
@@ -54,10 +53,21 @@ class _CountriesState extends State<Countries> {
                               child: Column(
                                 children: [
                                   ListTile(
-                                    leading: Container(height: 50, width: 50, color: Colors.white,),
-                                    title:
-                                        Container(height: 10, width: 89, color: Colors.white,),
-                                    subtitle: Container(height: 10, width: 89, color: Colors.white,),
+                                    leading: Container(
+                                      height: 50,
+                                      width: 50,
+                                      color: Colors.white,
+                                    ),
+                                    title: Container(
+                                      height: 10,
+                                      width: 89,
+                                      color: Colors.white,
+                                    ),
+                                    subtitle: Container(
+                                      height: 10,
+                                      width: 89,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -69,47 +79,106 @@ class _CountriesState extends State<Countries> {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-
                           String name = snapshot.data![index]['country'];
 
                           if (_searchController.text.isEmpty) {
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailsSecreen(
+                                              name: snapshot.data![index]
+                                                  ['country'] ?? 0,
+                                              image: snapshot.data![index]
+                                                  ['countryInfo']['flag'] ?? 0,
+                                              totalDeaths: snapshot.data![index]
+                                                  ['deaths'] ?? 0,
+                                              totalCases: snapshot.data![index]
+                                                  ['cases'] ?? 0,
+                                              totalRecovered: snapshot
+                                                  .data![index]['recovered'] ?? 0,
+                                              todayRecovered:
+                                                  snapshot.data![index]
+                                                      ['todayRecovered'] ?? 0,
+                                              active: snapshot.data![index]
+                                                  ['active'] ?? 0,
+                                              critical: snapshot.data![index]
+                                                  ['critical'] ?? 0,
+                                              test: snapshot.data![index]
+                                                  ['test'] ?? 0,
+                                            )));
+                              },
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Image(
+                                      height: 50,
+                                      width: 50,
+                                      image: NetworkImage(
+                                        snapshot.data![index]['countryInfo']
+                                            ['flag'],
+                                      ),
+                                    ),
+                                    title:
+                                        Text(snapshot.data![index]['country']),
+                                    subtitle: Text(
+                                        'Cases: ${snapshot.data![index]['cases']}'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else if (name
+                              .toLowerCase()
+                              .contains(_searchController.text.toLowerCase())) {
                             return Column(
-                            children: [
-                              ListTile(
-                                leading: Image(
-                                  height: 50,
-                                  width: 50,
-                                  image: NetworkImage(
-                                    snapshot.data![index]['countryInfo']['flag'],
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailsSecreen(
+                                              name: snapshot.data![index]
+                                                  ['country'] ?? 0,
+                                              image: snapshot.data![index]
+                                                  ['countryInfo']['flag'] ?? 0,
+                                              totalDeaths: snapshot.data![index]
+                                                  ['deaths'] ?? 0,
+                                              totalCases: snapshot.data![index]
+                                                  ['cases'] ?? 0,
+                                              totalRecovered: snapshot
+                                                  .data![index]['recovered'] ?? 0,
+                                              todayRecovered:
+                                                  snapshot.data![index]
+                                                      ['todayRecovered'] ?? 0,
+                                              active: snapshot.data![index]
+                                                  ['active'] ?? 0,
+                                              critical: snapshot.data![index]
+                                                  ['critical'] ?? 0,
+                                              test: snapshot.data![index]
+                                                  ['test'] ?? 0,
+                                            )));
+                                  },
+                                  child: ListTile(
+                                    leading: Image(
+                                      height: 50,
+                                      width: 50,
+                                      image: NetworkImage(
+                                        snapshot.data![index]['countryInfo']
+                                            ['flag'],
+                                      ),
+                                    ),
+                                    title: Text(snapshot.data![index]['country']),
+                                    subtitle: Text(
+                                        'Cases: ${snapshot.data![index]['cases']}'),
                                   ),
                                 ),
-                                title: Text(snapshot.data![index]['country']),
-                                subtitle: Text(
-                                    'Cases: ${snapshot.data![index]['cases']}'),
-                              ),
-                            ],
-                          );
-                          } else if (name.toLowerCase().contains(_searchController.text.toLowerCase())) {
-                            return Column(
-                            children: [
-                              ListTile(
-                                leading: Image(
-                                  height: 50,
-                                  width: 50,
-                                  image: NetworkImage(
-                                    snapshot.data![index]['countryInfo']['flag'],
-                                  ),
-                                ),
-                                title: Text(snapshot.data![index]['country']),
-                                subtitle: Text(
-                                    'Cases: ${snapshot.data![index]['cases']}'),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
                           } else {
                             return Container();
                           }
-                          
                         },
                       );
                     }
