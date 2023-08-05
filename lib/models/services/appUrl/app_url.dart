@@ -4,5 +4,5 @@ class AppUrl {
 
   //? fetch all world covid states
   static const String worldStatesApi = baseUrl + 'all';
-  static const String countriesList = worldStatesApi + 'countries';
+  static const String countriesList = baseUrl + 'countries';
 }

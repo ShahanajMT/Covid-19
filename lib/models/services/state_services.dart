@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 
 class StateServices {
+  //! fetchWorldStateRecords
   Future<WorldStatesModels> fetchWorldStateRecords () async {
     final response = await http.get(Uri.parse(AppUrl.worldStatesApi));
     
@@ -14,6 +15,21 @@ class StateServices {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       return WorldStatesModels.fromJson(data);
+    } else {
+      throw Exception('Error');
+    }
+  }
+
+  //! CountriesList
+  Future<List<dynamic>> countriesListApi () async {
+    var data;
+    final response = await http.get(Uri.parse(AppUrl.countriesList));
+    //print(response.body);
+    
+    if (response.statusCode == 200) {
+      print("The api is called success");
+       data = jsonDecode(response.body);
+      return data;
     } else {
       throw Exception('Error');
     }
