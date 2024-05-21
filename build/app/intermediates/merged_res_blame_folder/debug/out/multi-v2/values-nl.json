@@ -4,7 +4,7 @@
             "outputFile": "/home/ubantu/Documents/Flutter-Covid-19-Tracker-App-Tutorials-main/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
             "map": [
                 {
-                    "source": "/home/ubantu/.gradle/caches/transforms-2/files-2.1/44318f973e18fa59fe3957d8af199b21/core-1.6.0/res/values-nl/values-nl.xml",
+                    "source": "/home/ubantu/.gradle/caches/transforms-3/aecd8e3956666cf971adfacdc616f785/transformed/core-1.6.0/res/values-nl/values-nl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -99,12 +99,14 @@ class _CountriesState extends State<Countries> {
                                               totalRecovered: snapshot
                                                   .data![index]['recovered'] ?? 0,
                                               todayRecovered:
+                                              
                                                   snapshot.data![index]
                                                       ['todayRecovered'] ?? 0,
                                               active: snapshot.data![index]
                                                   ['active'] ?? 0,
                                               critical: snapshot.data![index]
                                                   ['critical'] ?? 0,
+                                                  updated: snapshot.data![index]['updated'] ?? 0,
                                               test: snapshot.data![index]
                                                   ['test'] ?? 0,
                                             )));
@@ -156,6 +158,7 @@ class _CountriesState extends State<Countries> {
                                                   ['active'] ?? 0,
                                               critical: snapshot.data![index]
                                                   ['critical'] ?? 0,
+                                                  updated: snapshot.data![index]['updated'],
                                               test: snapshot.data![index]
                                                   ['test'] ?? 0,
                                             )));

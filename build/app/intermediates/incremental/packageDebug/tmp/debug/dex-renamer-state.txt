@@ -1,4 +1,4 @@
-#Sat Aug 05 15:33:36 IST 2023
+#Tue Dec 19 20:44:16 IST 2023
 base.0=/home/ubantu/Documents/Flutter-Covid-19-Tracker-App-Tutorials-main/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

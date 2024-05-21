@@ -12,6 +12,7 @@ class DetailsSecreen extends StatefulWidget {
       todayRecovered,
       active,
       critical,
+      updated,
       test;
   DetailsSecreen({
     Key? key,
@@ -23,6 +24,7 @@ class DetailsSecreen extends StatefulWidget {
     required this.todayRecovered,
     required this.active,
     required this.critical,
+    required this.updated,
     required this.test,
   }) : super(key: key);
 
@@ -58,6 +60,7 @@ class _DetailsSecreenState extends State<DetailsSecreen> {
                       ReusableRow(title: 'Total Recovered', value: widget.totalRecovered.toString()),
                       ReusableRow(title: 'Active', value: widget.active.toString()),
                       ReusableRow(title: 'Test', value: widget.test.toString()),
+                      ReusableRow(title: 'Updated', value: widget.updated.toString()),
                       ReusableRow(title: 'Critical', value: widget.critical.toString()),
                     ],
                   ),
